@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sonix Movie Streaming</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Splash Screen -->
+    <div id="splash-screen">
+        <div id="logo-container">
+            <h1>Sonix Movies</h1>
+            <div id="loading-spinner">Loading...</div>
+        </div>
+    </div>
+
+
+    <!-- Check if the user is logged in -->
+    <script>
+        if (!sessionStorage.getItem('loggedInUser')) {
+            window.location.href = 'login.html';  // Redirect to login if not logged in
+        }
+    </script>
+
+    <!-- Loading Spinner -->
+    <div id="loading-spinner" class="loading-spinner">Loading...</div>
+
+    <!-- Error Message -->
+    <div id="error-message" class="error-message"></div>
+
+    <!-- App Name -->
+    <header id="app-header">
+        <h1>Sonix Movie Streaming</h1>
+    </header>
+
+    <!-- Search Bar and Filters -->
+    <div id="search-container">
+        <input type="text" id="search" placeholder="Search for movies...">
+        <button id="search-button">Search</button>
+        <select id="genre">
+            <option value="">Select Genre</option>
+            <option value="28">Action</option>
+            <option value="35">Comedy</option>
+            <option value="18">Drama</option>
+            <option value="27">Horror</option>
+            <option value="53">Thriller</option>
+        </select>
+    </div>
+
+    <!-- Trending Movies -->
+    <div id="trending-movies">
+        <h2>Trending Movies</h2>
+        <div id="movie-container"></div>
+    </div>
+
+    <!-- Movie Modal for Details -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="back-button" id="back-button">&larr; Back</span>
+            <span class="close">&times;</span>
+            <iframe id="trailer" width="560" height="315" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            <div id="movie-details">
+                <h3 id="movie-title"></h3>
+                <p id="movie-description"></p>
+                <p><strong>Release Date:</strong> <span id="release-date"></span></p>
+                <p><strong>Rating:</strong> <span id="rating"></span></p>
+                <div id="error-trailer-message"></div> <!-- Error message for no trailer -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Pagination Controls -->
+    <div id="pagination-controls">
+        <button id="prev-page">Previous</button>
+        <button id="next-page">Next</button>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
