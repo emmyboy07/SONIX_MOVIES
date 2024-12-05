@@ -36,12 +36,14 @@ let totalPages = 1;
 
 // Show Loading Spinner
 function showLoadingSpinner() {
-    // Insert logic for showing loading spinner if needed
+    const spinner = document.getElementById('loading-spinner');
+    spinner.style.display = 'inline-block'; // Show the spinner
 }
 
 // Hide Loading Spinner
 function hideLoadingSpinner() {
-    // Insert logic for hiding loading spinner if needed
+    const spinner = document.getElementById('loading-spinner');
+    spinner.style.display = 'none'; // Hide the spinner
 }
 
 // Fetch Movies from TMDb API
@@ -174,13 +176,3 @@ backButton.addEventListener('click', () => {
 
 // Initial Load of Movies
 fetchMovies();
-
-
-// Wait for the splash screen to finish animation before displaying the rest of the page
-window.addEventListener('load', () => {
-    setTimeout(() => {
-        const splashScreen = document.getElementById('splash-screen');
-        splashScreen.style.display = 'none'; // Hide the splash screen
-        document.body.style.overflow = 'auto'; // Re-enable scrolling after splash screen disappears
-    }, 3000); // The splash screen will last for 3 seconds
-});

@@ -17,7 +17,6 @@
         </div>
     </div>
 
-
     <!-- Check if the user is logged in -->
     <script>
         if (!sessionStorage.getItem('loggedInUser')) {
@@ -38,9 +37,9 @@
 
     <!-- Search Bar and Filters -->
     <div id="search-container">
-        <input type="text" id="search" placeholder="Search for movies...">
-        <button id="search-button">Search</button>
-        <select id="genre">
+        <input type="text" id="search" placeholder="Search for movies..." aria-label="Search for movies">
+        <button id="search-button" aria-label="Search button">Search</button>
+        <select id="genre" aria-label="Select Genre">
             <option value="">Select Genre</option>
             <option value="28">Action</option>
             <option value="35">Comedy</option>
