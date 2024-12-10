@@ -1,13 +1,4 @@
-/* General Body Styling */
-html, body {
-    margin: 0; /* Remove default margins */
-    padding: 0; /* Remove default padding */
-    width: 100%; /* Ensure full width */
-    height: 100%; /* Ensure full height */
-    overflow-x: hidden; /* Prevent horizontal scrolling */
-    overflow-y: auto; /* Allow vertical scrolling */
-    scroll-behavior: smooth; /* Optional: Adds smooth scrolling */
-  }
+
 
 body {
     
