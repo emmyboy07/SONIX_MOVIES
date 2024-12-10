@@ -28,8 +28,8 @@ const modal = document.getElementById('modal');
 const trailer = document.getElementById('trailer');
 const closeModal = document.getElementsByClassName('close')[0];
 const backButton = document.getElementById('back-button');
-const prevPageButton = document.getElementById('prev-page');
-const nextPageButton = document.getElementById('next-page');
+const darkModeToggle = document.getElementById('dark-mode-toggle'); // Dark mode toggle button
+const errorMessageContainer = document.getElementById('error-message'); // Error message container
 
 let currentPage = 1;
 let totalPages = 1;
@@ -46,6 +46,17 @@ function hideLoadingSpinner() {
     spinner.style.display = 'none'; // Hide the spinner
 }
 
+// Display Error Message
+function displayErrorMessage(message) {
+    errorMessageContainer.textContent = message;
+    errorMessageContainer.style.display = 'block';
+}
+
+// Hide Error Message
+function hideErrorMessage() {
+    errorMessageContainer.style.display = 'none';
+}
+
 // Fetch Movies from TMDb API
 async function fetchMovies(query = '', genre = '') {
     let apiUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${tmdbApiKey}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${currentPage}`;
@@ -60,11 +71,17 @@ async function fetchMovies(query = '', genre = '') {
     try {
         showLoadingSpinner();
         const response = await fetch(apiUrl);
+        if (!response.ok) throw new Error('Failed to fetch movies. Please try again later.');
         const data = await response.json();
-        displayMovies(data.results);
+        if (data.results.length === 0) {
+            displayErrorMessage('No movies found for your search.');
+        } else {
+            hideErrorMessage();
+            displayMovies(data.results);
+        }
         totalPages = data.total_pages;
     } catch (error) {
-        console.error('Error fetching movies:', error);
+        displayErrorMessage(error.message || 'An error occurred while fetching the data.');
     } finally {
         hideLoadingSpinner();
     }
@@ -82,17 +99,11 @@ async function fetchTrailer(movieId) {
     const response = await fetch(`https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${tmdbApiKey}`);
     const data = await response.json();
     const trailer = data.results.find(video => video.type === 'Trailer' && video.site === 'YouTube');
-    return trailer ? `https://www.youtube.com/embed/${trailer.key}?autoplay=1` : '';
+    return trailer ? `https://www.youtube.com/embed/${trailer.key}?autoplay=1` : null;
 }
 
 // Display Movies in the UI
 function displayMovies(movies) {
-    movieContainer.innerHTML = '';
-    if (movies.length === 0) {
-        movieContainer.innerHTML = '<p>No movies found.</p>';
-        return;
-    }
-
     movies.forEach(async movie => {
         if (!movie.poster_path) return;  // Skip movies without posters
 
@@ -137,6 +148,8 @@ function displayMovies(movies) {
 searchButton.addEventListener('click', () => {
     const query = searchInput.value;
     const genre = genreSelect.value;
+    currentPage = 1; // Reset to first page
+    movieContainer.innerHTML = ''; // Clear previous movies
     fetchMovies(query, genre);
 });
 
@@ -144,22 +157,9 @@ searchButton.addEventListener('click', () => {
 genreSelect.addEventListener('change', () => {
     const query = searchInput.value;
     const genre = genreSelect.value;
+    currentPage = 1; // Reset to first page
+    movieContainer.innerHTML = ''; // Clear previous movies
     fetchMovies(query, genre);  // Fetch movies with the selected genre
-});
-
-// Handle Pagination
-prevPageButton.addEventListener('click', () => {
-    if (currentPage > 1) {
-        currentPage--;
-        fetchMovies();
-    }
-});
-
-nextPageButton.addEventListener('click', () => {
-    if (currentPage < totalPages) {
-        currentPage++;
-        fetchMovies();
-    }
 });
 
 // Close Modal
@@ -172,6 +172,21 @@ closeModal.addEventListener('click', () => {
 backButton.addEventListener('click', () => {
     modal.style.display = 'none';
     trailer.src = ''; // Clear the trailer when going back
+});
+
+// Dark Mode Toggle
+darkModeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode'); // Toggle dark mode on body
+});
+
+// Lazy Scroll (Infinite Scroll)
+window.addEventListener('scroll', () => {
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 500 && currentPage < totalPages) {
+        currentPage++; // Increment page number for next set of movies
+        const query = searchInput.value;
+        const genre = genreSelect.value;
+        fetchMovies(query, genre);
+    }
 });
 
 // Initial Load of Movies

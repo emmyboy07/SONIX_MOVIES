@@ -10,45 +10,35 @@
 </head>
 
 <body>
-    <!-- Splash Screen -->
-    <div id="splash-screen">
-        <div id="logo-container">
-            <h1>Sonix Movies</h1>
-            <div id="loading-spinner">Loading...</div>
+        <!-- Splash Screen -->
+        <div id="splash-screen">
+            <div id="logo-container">
+                <h1>Sonix Movies</h1>
+                <div id="loading-spinner">Loading...</div>
+            </div>
         </div>
-    </div>
-
-    <!-- Check if the user is logged in -->
-    <script>
-        if (!sessionStorage.getItem('loggedInUser')) {
-            window.location.href = 'login.html';  // Redirect to login if not logged in
-        }
-    </script>
-
-    <!-- Loading Spinner -->
-    <div id="loading-spinner" class="loading-spinner">Loading...</div>
-
-    <!-- Error Message -->
-    <div id="error-message" class="error-message"></div>
-
-    <!-- App Name -->
-    <header id="app-header">
-        <h1>Sonix Movie Streaming</h1>
-    </header>
-
-    <!-- Search Bar and Filters -->
-    <div id="search-container">
-        <input type="text" id="search" placeholder="Search for movies..." aria-label="Search for movies">
-        <button id="search-button" aria-label="Search button">Search</button>
-        <select id="genre" aria-label="Select Genre">
-            <option value="">Select Genre</option>
-            <option value="28">Action</option>
-            <option value="35">Comedy</option>
-            <option value="18">Drama</option>
-            <option value="27">Horror</option>
-            <option value="53">Thriller</option>
-        </select>
-    </div>
+        <!-- Error Message Container -->
+    <div id="error-message" style="display: none; color: red; padding: 10px; text-align: center;"></div>
+    
+        <!-- App Header -->
+        <header id="app-header">
+            <h1>Sonix Movie Streaming</h1>
+            <button id="dark-mode-toggle">Dark Mode</button>
+        </header>
+    
+        <!-- Search Bar and Filters -->
+        <div id="search-container">
+            <input type="text" id="search" placeholder="Search for movies..." aria-label="Search for movies">
+            <button id="search-button" aria-label="Search button">Search</button>
+            <select id="genre" aria-label="Select Genre">
+                <option value="">Select Genre</option>
+                <option value="28">Action</option>
+                <option value="35">Comedy</option>
+                <option value="18">Drama</option>
+                <option value="27">Horror</option>
+                <option value="53">Thriller</option>
+            </select>
+        </div>
 
     <!-- Trending Movies -->
     <div id="trending-movies">
@@ -56,38 +46,37 @@
         <div id="movie-container"></div>
     </div>
 
-    <!-- Movie Modal for Details -->
+    <!-- Movie Modal -->
     <div id="modal" class="modal">
         <div class="modal-content">
             <span class="back-button" id="back-button">&larr; Back</span>
             <span class="close">&times;</span>
             <iframe id="trailer" width="560" height="315" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
             <div id="movie-details">
-                <h3 id="movie-title"></h3>
-                <p id="movie-description"></p>
+                <h3 id="movie-title">Movie Title</h3>
+                <p id="movie-description">Movie Description</p>
                 <p><strong>Release Date:</strong> <span id="release-date"></span></p>
                 <p><strong>Rating:</strong> <span id="rating"></span></p>
-                <div id="error-trailer-message"></div> <!-- Error message for no trailer -->
             </div>
         </div>
     </div>
 
-    <!-- Pagination Controls -->
-    <div id="pagination-controls">
-        <button id="prev-page">Previous</button>
-        <button id="next-page">Next</button>
-    </div>
-
     <script src="app.js"></script>
 </body>
+
 <footer class="footer">
-    <p>&copy; 2024 Sonix Movie Streaming <br>
-    Developed by Emmy Tech</p>
+    <p>&copy; 2024 Sonix Movie Streaming <br> Developed by Emmy Tech</p>
     <div class="social-icons">
-      <a href="https://www.facebook.com/profile.php?id=100077330388703"><img src="icon-facebook.svg" alt="Facebook"></a>
-      <a href="https://wa.me/message/WUSXWOWEOJTGA1"><img src="icon-Whatsapp.svg" alt="Whatsapp"></a>
+        <a href="https://www.facebook.com/profile.php?id=100077330388703"><img src="icon-facebook.svg" alt="Facebook"></a>
+        <a href="https://wa.link/o35sym"><img src="icon-whatsapp.svg" alt="WhatsApp"></a>
     </div>
-  </footer>
+</footer>
+ <!-- Check if the user is logged in -->
+ <script>
+    if (!sessionStorage.getItem('loggedInUser')) {
+        window.location.href = 'login.html';  // Redirect to login if not logged in
+    }
+</script>
 
 
 </html>
