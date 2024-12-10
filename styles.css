@@ -1,8 +1,13 @@
 /* General Body Styling */
 html, body {
-    touch-action: none; /* Disables gestures like zooming */
-    -ms-touch-action: none; /* For older versions of IE */
-}
+    margin: 0; /* Remove default margins */
+    padding: 0; /* Remove default padding */
+    width: 100%; /* Ensure full width */
+    height: 100%; /* Ensure full height */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    overflow-y: auto; /* Allow vertical scrolling */
+    scroll-behavior: smooth; /* Optional: Adds smooth scrolling */
+  }
 
 body {
     user-select: none; /* Optional: Prevent text selection which could lead to zooming */
