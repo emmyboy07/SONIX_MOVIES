@@ -1,3 +1,26 @@
+/* Prevent body from exceeding screen width */
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Disable horizontal scrolling */
+}
+
+/* Ensure all elements respect the viewport width */
+* {
+    box-sizing: border-box; /* Ensure padding/margin don't affect width calculations */
+}
+
+/* Prevent images or large content from breaking the layout */
+img, video {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Ensure elements don't expand beyond the viewport */
+.container {
+    width: 100%;
+    overflow-x: hidden; /* Avoid horizontal scrolls in specific containers */
+}
 
 
 body {
