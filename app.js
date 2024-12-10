@@ -179,9 +179,9 @@ darkModeToggle.addEventListener('click', () => {
     document.body.classList.toggle('dark-mode'); // Toggle dark mode on body
 });
 
-// Lazy Scroll (Infinite Scroll)
+// Lazy Scroll (Optimized Infinite Scroll)
 window.addEventListener('scroll', () => {
-    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 500 && currentPage < totalPages) {
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 900 && currentPage < totalPages) {
         currentPage++; // Increment page number for next set of movies
         const query = searchInput.value;
         const genre = genreSelect.value;
