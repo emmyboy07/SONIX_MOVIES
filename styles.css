@@ -10,7 +10,7 @@ html, body {
   }
 
 body {
-    user-select: none; /* Optional: Prevent text selection which could lead to zooming */
+    
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
