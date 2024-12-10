@@ -1,5 +1,11 @@
 /* General Body Styling */
+html, body {
+    touch-action: none; /* Disables gestures like zooming */
+    -ms-touch-action: none; /* For older versions of IE */
+}
+
 body {
+    user-select: none; /* Optional: Prevent text selection which could lead to zooming */
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
